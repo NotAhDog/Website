@@ -1,5 +1,32 @@
 from app.routes import db
 
+# Association Tables
+ArtistFolio = db.Table(
+    'ArtistFolio',
+    db.Column('artist_id', db.Integer, db.ForeignKey('Artist.id'), primary_key=True),
+    db.Column('folio_id', db.Integer, db.ForeignKey('Folio.id'), primary_key=True)
+)
+
+FolioLayout = db.Table(
+    'FolioLayout',
+    db.Column('folio_id', db.Integer, db.ForeignKey('Folio.id'), primary_key=True),
+    db.Column('layout_id', db.Integer, db.ForeignKey('Layout.id'), primary_key=True)
+)
+
+ArtFolio = db.Table(
+    'ArtFolio',
+    db.Column('art_id', db.Integer, db.ForeignKey('Art.id'), primary_key=True),
+    db.Column('folio_id', db.Integer, db.ForeignKey('Folio.id'), primary_key=True)
+)
+
+ArtMeaning = db.Table(
+    'ArtMeaning',
+    db.Column('art_id', db.Integer, db.ForeignKey('Art.id'), primary_key=True),
+    db.Column('meaning_id', db.Integer, db.ForeignKey('Meaning.id'), primary_key=True)
+)
+
+# Models
+
 
 class Theme(db.Model):
     __tablename__ = "Theme"
