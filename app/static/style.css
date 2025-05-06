@@ -1,0 +1,60 @@
+/* change the default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+img{
+    margin: 0;
+    background-color: #879EB0;
+    font-family: "Boldonse-Regular";
+    color: #646165;
+}
+
+/* remove any unecciary margins and background colour for the items inside the navbar */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #272932;
+    position: static;
+    width: 100%;
+}
+  
+
+
+ul li{
+    display: inline-block;
+    position: relative;
+
+}
+  
+ul li a {
+    display: block;
+    padding: 20px 135.4px;
+    color: #FDF0D5;
+    text-align: center;
+    text-decoration: none;
+    font-size: 25px;
+}
+
+ul li ul.dropdown li{
+    display: block;
+}
+
+ul li ul.dropdown {
+    display: none;
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+    background: #272932;
+}
+
+ul li a:hover{ 
+    background: #7f7f7f;
+}
+
+ul li:hover ul.dropdown {
+    display: block;
+}

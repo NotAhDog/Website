@@ -1,4 +1,10 @@
 {% extends 'layout.html' %}
 {% block content %}
 <h1>Folios</h1>
+{% for folio in folios %}
+<p>{{ folio.name }}</p>
+<p>{{ folio.description }}</p>
+<img src="/static/images/{{ folio.photo }}" alt="dumb dumb not work">
+<br>
+{% endfor %}
 {% endblock %}
