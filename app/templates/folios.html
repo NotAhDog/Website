@@ -1,10 +1,19 @@
 {% extends 'layout.html' %}
 {% block content %}
 <h1>Folios</h1>
-{% for folio in folios %}
-<p>{{ folio.name }}</p>
-<p>{{ folio.description }}</p>
-<img src="/static/images/{{ folio.photo }}" alt="dumb dumb not work">
-<br>
-{% endfor %}
+<div class="folio-container">
+    {% for folio in folios %}
+    <div class="folio-item">
+        <p>{{ folio.name }}</p>
+        <br>
+        <img src="/static/images/{{ folio.photo }}" alt="dumb dumb not work" class="image-size" onclick="ShowDescription('{{ folio.id }}')">
+        <p id="{{ folio.id }}" style="display: none;">{{ folio.description }}</p>
+    </div>
+    {% endfor %}
+</div>
+<script>
+    function ShowDescription(id){
+        document.getElementById(id).style.display='block';
+    }
+</script>
 {% endblock %}

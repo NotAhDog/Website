@@ -2,12 +2,15 @@ from app import app
 from flask import render_template, abort
 from flask_sqlalchemy import SQLAlchemy  # no more boring old SQL for us!
 import os
-import app.models as models
+
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 db = SQLAlchemy()
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, "database.db")
 db.init_app(app)
+
+
+import app.models as models
 
 
 # --- Routes ---
@@ -21,12 +24,6 @@ def root():
 @app.route('/about')
 def about():
     return render_template('about.html', page_title='ABOUT')
-
-
-@app.route('/themes')
-def all_themes():
-    themes = models.Theme.query.all()
-    return render_template('themes.html', themes=themes)
 
 
 @app.route('/folios')
@@ -45,12 +42,6 @@ def all_artists():
 def all_arts():
     arts = models.Art.query.all()
     return render_template('artwork.html', arts=arts)
-
-
-@app.route('/theme/<int:id>')
-def theme(id):
-    theme = models.Theme.query.get_or_404(id)
-    return render_template('theme.html', theme=theme)
 
 
 @app.route('/folio/<int:id>')

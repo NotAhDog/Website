@@ -6,16 +6,16 @@ h3,
 h4,
 p,
 img{
-    margin: 0;
+    font-family: "Boldonse", system-ui;
+    margin: auto;
     background-color: #879EB0;
-    font-family: "Boldonse-Regular";
-    color: #646165;
+    color: #272932;
 }
 
 /* remove any unecciary margins and background colour for the items inside the navbar */
 ul {
     list-style-type: none;
-    margin: 0;
+    margin: auto;
     padding: 0;
     background-color: #272932;
     position: static;
@@ -32,7 +32,8 @@ ul li{
   
 ul li a {
     display: block;
-    padding: 20px 135.4px;
+    margin: auto;
+    padding: 20px 0px;
     color: #FDF0D5;
     text-align: center;
     text-decoration: none;
@@ -57,4 +58,23 @@ ul li a:hover{
 
 ul li:hover ul.dropdown {
     display: block;
+}
+
+.navbar-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.folio-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.image-size{
+    height: 300px;
+}
+
+.folio-item{
+    padding: 10px 20px;
+    text-align: center;
 }
