@@ -13,7 +13,16 @@
 </div>
 <script>
     function ShowDescription(id){
-        document.getElementById(id).style.display='block';
+        var is_visible=false;
+        if(document.getElementById(id).style.display=='block'){
+            is_visible=true;
+        }
+        {% for folio in folios %}
+        document.getElementById('{{ folio.id }}').style.display='none';
+        {% endfor %}
+        if(!is_visible){
+            document.getElementById(id).style.display='block';
+        }
     }
 </script>
 {% endblock %}
