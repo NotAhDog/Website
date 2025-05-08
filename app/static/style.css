@@ -79,3 +79,7 @@ ul li:hover ul.dropdown {
     padding: 10px 20px;
     text-align: center;
 }
+
+.home-layout{
+    align-items: center;
+}
