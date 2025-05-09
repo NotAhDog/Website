@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Boldonse&display=swap');
-/* change the default margin */
+
+
+/* Changing the default margin */
+
 body,
 h1,
 h2,
@@ -11,9 +14,11 @@ img{
     margin: auto;
     background-color: #879EB0;
     color: #272932;
+    user-select: none;
 }
 
-/* remove any unecciary margins and background colour for the items inside the navbar */
+/* Making the nav bar */
+
 ul {
     list-style-type: none;
     margin: auto;
@@ -66,13 +71,48 @@ ul li:hover ul.dropdown {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
+/* Making the folios page */
+
 .folio-container{
     display: flex;
     flex-direction: row;
 }
 
-.image-size{
-    height: 300px;
+.container {
+  position: relative;
+  width: fit-content;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  height: 300px;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+
+.container:hover .image {
+  opacity: 0.3;
+}
+
+.container:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: #C6D8D3;
+  font-size: 16px;
+  padding: 16px 32px;
 }
 
 .folio-item{
@@ -80,6 +120,9 @@ ul li:hover ul.dropdown {
     text-align: center;
 }
 
-.home-layout{
-    align-items: center;
+/* Making the text centered */
+
+.title{
+    margin: auto;
+    text-align: center;
 }
