@@ -4,7 +4,7 @@
 {% extends 'layout.html' %}
 {% block content %}
 <h1 class="title">Folios</h1>
-<div class="folio-container" onmousedown="StartScroll()" onmouseup="StopScroll()" id="folio-container">
+<div class="folio-container" id="image-slider" data-mouse-down-at="0" data-prev-percentage="-20" data-percentage="0 ">
     {% for folio in folios %}
     <div class="folio-item">
         <p>{{ folio.name }}</p>
@@ -40,57 +40,52 @@
 
 // Making the page scroll with the movement of the mouse 
 
-    var mousedown=false;
-    var initialxoffset=0;
-    var initialtranslation=0;
+        const track = document.getElementById("image-slider");
 
-    function StartScroll(){
-        var e=window.event;
-        console.log(e.pageX);
-        initialxoffset=e.pageX;
-        mousedown=true;
-        handleMouseMove();
-    }
+        const handleOnDown = e => track.dataset.mouseDownAt = e.clientX;
 
-    function MoveMouse(){
-        console.log("Y")
-        var e=window.event;
-        var mousepos=e.pageX;
-        var offset=initialxoffset-mousepos;
-        if(mousedown){
-            console.log(offset);
-            requestAnimationFrame(MoveMouse);
-            document.getElementById('folio-container').style.transform=`translateX(123px)`.replace('123', offset.toString());
+        const handleOnUp = () => {
+        track.dataset.mouseDownAt = "0";
+        track.dataset.prevPercentage = track.dataset.percentage;
+        };
+
+        const handleOnMove = e => {
+        if (track.dataset.mouseDownAt === "0") return;
+
+        const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
+        maxDelta = window.innerWidth / 1;
+        const percentage = mouseDelta / maxDelta * -80,
+        nextPercentageUnconstrained = parseFloat(track.dataset.prevPercentage) + percentage,
+        nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, -20), -80); // or -20.8 and -78.2
+
+        track.dataset.percentage = nextPercentage;
+
+        track.animate({
+            transform: `translate(${nextPercentage}%, 0%)` },
+        { duration: 1200, fill: "forwards" });
+
+        for (const image of track.getElementsByClassName("image")) {
+            image.animate({
+            objectPosition: `${100 + nextPercentage}% center` },
+            { duration: 1200, fill: "forwards" });
         }
-    }
+        };
 
-    (function() {
-    document.onmousemove = handleMouseMove;
-    function handleMouseMove(event) {
-        if(mousedown){
-        var eventDoc, doc, body;
-        var e=window.event;
-        var mousepos=e.pageX;
-        var offset=initialxoffset-mousepos;
+        // -- Had to add extra lines for touch events -- //
 
-        event = event || window.event; 
+        window.onmousedown = e => handleOnDown(e);
 
-        if (event.pageX == null && event.clientX != null) {
-            eventDoc = (event.target && event.target.ownerDocument) || document;
-            doc = eventDoc.documentElement;
-            body = eventDoc.body;
+        window.ontouchstart = e => handleOnDown(e.touches[0]);
 
-            event.pageX = event.clientX +
-              (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
-              (doc && doc.clientLeft || body && body.clientLeft || 0);
-        }
-        document.getElementById('folio-container').style.transform=`translateX(123px)`.replace('123', offset.toString());
-        }
-    }
-})();
+        window.onmouseup = e => handleOnUp(e);
 
-    function StopScroll(){
-        mousedown=false;
-    }
-</script>
+        window.ontouchend = e => handleOnUp(e.touches[0]);
+
+        window.onmousemove = e => handleOnMove(e);
+
+        window.ontouchmove = e => handleOnMove(e.touches[0]);
+    
+    // Making the image expand when clicked on //
+    
+    </script>
 {% endblock %}

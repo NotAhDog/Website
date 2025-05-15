@@ -1,6 +1,7 @@
 from app.routes import db
 
 # Association Tables
+
 ArtistFolio = db.Table(
     'ArtistFolio',
     db.Column('artist_id', db.Integer, db.ForeignKey('Artist.id'), primary_key=True),

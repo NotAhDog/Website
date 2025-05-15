@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, abort
-from flask_sqlalchemy import SQLAlchemy  # no more boring old SQL for us!
+from flask_sqlalchemy import SQLAlchemy
 import os
 
 
@@ -16,29 +16,29 @@ import app.models as models
 # --- Routes ---
 
 
-@app.route('/')
+@app.route('/')  # Home page
 def root():
     return render_template('home.html', page_title='HOME')
 
 
-@app.route('/about')
+@app.route('/about')  # About page
 def about():
     return render_template('about.html', page_title='ABOUT')
 
 
-@app.route('/folios')
+@app.route('/folios')  # Folios page
 def all_folios():
     folios = models.Folio.query.all()
     return render_template('folios.html', folios=folios)
 
 
-@app.route('/artists')
+@app.route('/artists')  # Artists page
 def all_artists():
     artists = models.Artist.query.all()
     return render_template('artists.html', artists=artists)
 
 
-@app.route('/artwork')
+@app.route('/artwork')  # Artwork page
 def all_arts():
     arts = models.Art.query.all()
     return render_template('artwork.html', arts=arts)
@@ -61,6 +61,9 @@ def art(id):
     art = models.Art.query.get_or_404(id)
     return render_template('art.html', art=art, meanings=art.meanings, folios=art.folios)
 
+@app.route('/secret')  # Secret page
+def secret():
+    return render_template('secret.html')
 
 @app.errorhandler(404)
 def page_not_found(e):

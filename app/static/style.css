@@ -15,6 +15,7 @@ img{
     background-color: #879EB0;
     color: #272932;
     user-select: none;
+    overflow: hidden;
 }
 
 /* Making the nav bar */
@@ -74,8 +75,11 @@ ul li:hover ul.dropdown {
 /* Making the folios page */
 
 .folio-container{
+    width: fit-content;
     display: flex;
     flex-direction: row;
+    margin-left: 50%;
+    transform: translate(-20%, 0%);
 }
 
 .container {
@@ -84,11 +88,16 @@ ul li:hover ul.dropdown {
 }
 
 .image {
+  width: 675px;
+  object-fit: cover;
+  object-position: 80% 50%;
   opacity: 1;
   display: block;
-  height: 300px;
+  height: 550px;
   transition: .5s ease;
   backface-visibility: hidden;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .middle {
@@ -125,4 +134,11 @@ ul li:hover ul.dropdown {
 .title{
     margin: auto;
     text-align: center;
+}
+
+/* Making a secret little smile */
+
+.smile{
+  margin: auto;
+  text-align: center;
 }
