@@ -18,6 +18,10 @@ img{
     overflow: hidden;
 }
 
+main{
+  height: 85vh;
+}
+
 /* Making the nav bar */
 
 ul {
@@ -141,4 +145,27 @@ ul li:hover ul.dropdown {
 .smile{
   margin: auto;
   text-align: center;
+}
+
+/* Text styling */
+
+.footer{
+  margin: auto;
+  text-align: center;
+  padding: 0;
+  background-color: #272932;
+  color: #FDF0D5;
+  width: 100%;
+  font-size: 20px;
+  height: 1000px;
+}
+
+.aboutheadings{
+  margin: auto;
+  font-size: 20px;
+}
+
+.abouttext{
+  margin: auto;
+  font-size: 15px;
 }
