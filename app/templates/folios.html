@@ -4,10 +4,11 @@
 {% extends 'layout.html' %}
 {% block content %}
 <h1 class="title">Folios</h1>
-<div class="folio-container" id="image-slider" data-mouse-down-at="0" data-prev-percentage="-20" data-percentage="0 ">
+<div class="line"></div>
+<div class="folio-container" id="image-slider" data-mouse-down-at="0" data-prev-percentage="-20" data-percentage="0">
     {% for folio in folios %}
     <div class="folio-item">
-        <p>{{ folio.name }}</p>
+        <p class="folioname">{{ folio.name }}</p>
         <br>
 
         <!-- Adding the images/descriptions -->
@@ -17,7 +18,7 @@
             <div class="text">Learn More</div>
         </div>
     </div>
-        <p id="{{ folio.id }}" style="display: none;">{{ folio.description }}</p>
+        <p id="{{ folio.id }}" style="display: none;" class="foliodescription">{{ folio.description }}</p>
     </div>
     {% endfor %}
 </div>

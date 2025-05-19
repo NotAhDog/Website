@@ -102,6 +102,7 @@ ul li:hover ul.dropdown {
   backface-visibility: hidden;
   user-select: none;
   -webkit-user-drag: none;
+  box-shadow: 10px 10px;
 }
 
 .middle {
@@ -111,7 +112,7 @@ ul li:hover ul.dropdown {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%)
+  -ms-transform: translate(-50%, -50%);
 }
 
 .container:hover .image {
@@ -133,11 +134,21 @@ ul li:hover ul.dropdown {
     text-align: center;
 }
 
+.foliodescription{
+  padding-top: 10px;
+  padding-left: 20px;
+}
+
+.folioname{
+  padding-top: 20px;
+}
+
 /* Making the text centered */
 
 .title{
     margin: auto;
     text-align: center;
+    padding-bottom: 20px;
 }
 
 /* Making a secret little smile */
@@ -152,20 +163,38 @@ ul li:hover ul.dropdown {
 .footer{
   margin: auto;
   text-align: center;
-  padding: 0;
+  padding: 5px;
   background-color: #272932;
   color: #FDF0D5;
-  width: 100%;
+  width: 500px;
   font-size: 20px;
   height: 1000px;
+  border-style: solid;
+  border-color: #C6D8D3;
+  border-width: 4px;
+  border-radius: 10px;
 }
 
 .aboutheadings{
   margin: auto;
   font-size: 20px;
+  padding-left: 15px;
+  padding-bottom: 10px;
+  padding-top: 20px;
 }
 
 .abouttext{
   margin: auto;
   font-size: 15px;
+  padding-left: 50px;
+}
+
+.line{
+  margin: auto;
+  width: 75%;
+  height: 7px;
+  background-color: #272932;
+  border-style: solid;
+  border-radius: 10px;
+  border-color: #C6D8D3;
 }
