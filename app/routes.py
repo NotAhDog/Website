@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, abort
+from flask import render_template, abort, request
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -16,8 +16,9 @@ import app.models as models
 # --- Routes ---
 
 
-@app.route('/')  # Home page
+@app.route('/', methods=['GET', 'POST'])  # Home page
 def root():
+    print(request.args.get('user'))
     return render_template('home.html', page_title='HOME')
 
 
@@ -64,11 +65,6 @@ def art(id):
 @app.route('/secret')  # Secret page
 def secret():
     return render_template('secret.html')
-
-@app.route('/add' , methods=['GET' , 'POST'])
-def add():
-    print(request.args.get('test'))
-    return "Done"
 
 @app.errorhandler(404)
 def page_not_found(e):

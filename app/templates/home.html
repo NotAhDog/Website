@@ -3,7 +3,20 @@
 <h1 class="title">Home</h1>
 <div class="line"></div><br>
 <form class="title">
-    <label for="test">Testing:</label><br>
-    <input type="text" id="test" name="test">
+    <label for="user">Enter your username:</label>
+    <input type="text" id="user" name="user"><br>
+
+    <label for="pass">Enter your password:</label>
+    <input type="password" id="pass" name="pass"><br><br>
+
+    <label for="yes">Do you want to save your password?</label><br>
+
+    <input type="radio" id="yes" name="yesno" value="Yes">
+    <label for="yes">Yes</label><br>
+
+    <input type="radio" id="no" name="yesno" value="No">
+    <label for="no">No</label><br>
+    
+    <input type="submit">
 </form>
 {% endblock %}
