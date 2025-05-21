@@ -49,6 +49,37 @@ ul li a {
     text-align: center;
     text-decoration: none;
     font-size: 25px;
+    transition-duration: 0.5s;
+}
+
+.hovernav span{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.hovernav span::after{
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.hovernav:hover span{
+  padding-right: 30px;
+}
+
+.hovernav:hover{ 
+    background: #7f7f7f;
+    transition: 0.5s;
+}
+
+.hovernav:hover span::after{
+  opacity: 1;
+  right: 0;
 }
 
 ul li ul.dropdown li{
@@ -63,9 +94,6 @@ ul li ul.dropdown {
     background: #272932;
 }
 
-ul li a:hover{ 
-    background: #7f7f7f;
-}
 
 ul li:hover ul.dropdown {
     display: block;
@@ -127,6 +155,37 @@ ul li:hover ul.dropdown {
   background-color: #C6D8D3;
   font-size: 16px;
   padding: 16px 32px;
+  transition-duration: 0.5s;
+}
+
+.text span{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.text span::after{
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.text:hover span{
+  padding-right: 25px;
+}
+
+.text:hover{
+  background-color: #272932;
+  color: #FDF0D5;
+}
+
+.text:hover span::after{
+  opacity: 1;
+  right: 0;
 }
 
 .folio-item{

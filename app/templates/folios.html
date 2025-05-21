@@ -1,5 +1,5 @@
 <head>
-    <title>Eds Art - Folios</title>
+    <title>Ed's Art - Folios</title>
 </head>
 {% extends 'layout.html' %}
 {% block content %}
@@ -13,18 +13,18 @@
 
         <!-- Adding the images/descriptions -->
     <div class="container">
-        <img src="/static/images/{{ folio.photo }}" class="image" percentage="{{ i*10 }}">
+        <img src="/static/images/{{ folio.photo }}" class="image">
         <div class="middle" onclick="ShowDescription('{{ folio.id }}')">
-            <div class="text">Learn More</div>
+            <div class="text" style="vertical-align:middle"><span>Learn More </span></div>
         </div>
     </div>
-        <p id="{{ folio.id }}" style="display: none;" class="foliodescription">{{ folio.description }}</p>
+        <p id="{{ folio.id }}" style="display: none;" class="foliodescription">{{ folio.description }}. <br><br> If you would like to learn even more about these folios use the dropdown menu.</p>
     </div>
     {% endfor %}
 </div>
 <script>
 
-// Making the description show and hide on click of the folios
+// Making the description and learn more show and hide on click of the folios
 
     function ShowDescription(id){
         var is_visible=false;
