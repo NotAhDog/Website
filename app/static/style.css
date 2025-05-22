@@ -257,3 +257,45 @@ ul li:hover ul.dropdown {
   border-radius: 10px;
   border-color: #C6D8D3;
 }
+
+/* Home page styling */
+
+.profilepicture{
+  margin-left: 60%;
+  margin-top: -300px;
+  scale: 150%;
+  box-shadow: 10px 10px;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.extratext{
+  margin: auto;
+  font-size: 15px;
+  color: #C6D8D3;
+}
+
+.photoofme{
+  margin-left: 55%;
+  margin-top: -650px;
+  font-size: 20px;
+}
+
+.extratext:link {
+  text-decoration: none;
+}
+
+.extratext:visited {
+  text-decoration: none;
+}
+
+.extratext:hover {
+  transition: 0.3s;
+  text-decoration: underline;
+  text-decoration-thickness: 2.5px;
+  color: #FDF0D5;
+}
+
+.extratext:active {
+  text-decoration: underline;
+}

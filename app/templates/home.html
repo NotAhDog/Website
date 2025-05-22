@@ -1,22 +1,35 @@
 {% extends 'layout.html' %}
 {% block content %}
 <h1 class="title">Home</h1>
-<div class="line"></div><br>
-<form class="title">
-    <label for="user">Enter your username:</label>
-    <input type="text" id="user" name="user"><br>
-
-    <label for="pass">Enter your password:</label>
-    <input type="password" id="pass" name="pass"><br><br>
-
-    <label for="yes">Do you want to save your password?</label><br>
-
-    <input type="radio" id="yes" name="yesno" value="Yes">
-    <label for="yes">Yes</label><br>
-
-    <input type="radio" id="no" name="yesno" value="No">
-    <label for="no">No</label><br>
-    
-    <input type="submit">
-</form>
+<div class="line"></div>
+<h3 class="aboutheadings">
+    Basic Introduction
+</h3>
+<h4 class="abouttext">
+    Welcome to the portfolio of Edward, a multidisciplinary artist exploring identity 
+    <br>
+    through digital art, photography, printmaking, and occasional sculpture and painting.
+    <br>
+    Blending minimalism with both abstract and realistic styles, this space is a 
+    <br>
+    reflection of personal expression, creative curiosity, and visual storytelling.
+    <br>
+</h4>
+<br>
+<h3 class="aboutheadings">Who am I?</h3>
+<h4 class="abouttext">
+    I am Edward, I love my different art subjects along with the unquie designs that
+    <br>
+    can be created through different artwork. My favourite art subjects consist of,
+    <br>
+    Design, Printmaking, and Photography.
+</h4>
+<br>
+<h3 class="aboutheadings">Want to learn more?</h3>
+<h4 class="abouttext">
+    Click this link:
+    <a href="/about" class="extratext"><span>About Page</span></a>
+</h4>
+<img src=/static/images/profile.jpg class="profilepicture">
+<h3 class="photoofme">Photo of me:</h3>
 {% endblock %}
