@@ -262,7 +262,7 @@ ul li:hover ul.dropdown {
 
 .profilepicture{
   margin-left: 60%;
-  margin-top: -300px;
+  margin-top: -365px;
   scale: 150%;
   box-shadow: 10px 10px;
   user-select: none;
@@ -298,4 +298,19 @@ ul li:hover ul.dropdown {
 
 .extratext:active {
   text-decoration: underline;
+}
+
+/** About page styling **/ 
+
+.aboutme{
+  margin-left: 52%;
+  margin-top: 0px;
+  font-size: 15px;
+}
+
+.aboutmeheading{
+  margin-left: 50%;
+  margin-top: -440px;
+  font-size: 20px;
+  padding-bottom: 10px;
 }
