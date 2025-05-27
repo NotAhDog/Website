@@ -200,6 +200,17 @@ ul li:hover ul.dropdown {
 
 .folioname{
   padding-top: 20px;
+  background-color: transparent;
+}
+
+.bigimage{
+    transform: translate(0, 0);
+    margin:auto;
+    display:none;
+    max-width: 100vw;
+    max-height: 100vh;
+    transition: all ease-in-out 1.2s;
+    z-index: 2;
 }
 
 /* Making the text centered */
@@ -261,8 +272,8 @@ ul li:hover ul.dropdown {
 /* Home page styling */
 
 .profilepicture{
-  margin-left: 60%;
-  margin-top: -365px;
+  margin-left: 17%;
+  margin-top: -400px;
   scale: 150%;
   box-shadow: 10px 10px;
   user-select: none;
@@ -275,10 +286,16 @@ ul li:hover ul.dropdown {
   color: #C6D8D3;
 }
 
-.photoofme{
-  margin-left: 55%;
-  margin-top: -650px;
+.textbody{
+  margin-left: 47%;
+  font-size: 15px;
+}
+
+.textheading{
+  margin-left: 45%;
   font-size: 20px;
+  padding-bottom: 10px;
+  padding-top: 20px;
 }
 
 .extratext:link {

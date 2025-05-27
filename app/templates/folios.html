@@ -5,39 +5,42 @@
 {% block content %}
 <h1 class="title">Folios</h1>
 <div class="line"></div>
-<div class="folio-container" id="image-slider" data-mouse-down-at="0" data-prev-percentage="-20" data-percentage="0">
-    {% for folio in folios %}
-    <div class="folio-item">
-        <p class="folioname">{{ folio.name }}</p>
-        <br>
-
-        <!-- Adding the images/descriptions -->
-    <div class="container">
-        <img src="/static/images/{{ folio.photo }}" class="image">
-        <div class="middle" onclick="ShowDescription('{{ folio.id }}')">
-            <div class="text" style="vertical-align:middle"><span>Learn More </span></div>
+<div id="slide-up">
+    <div class="folio-container" id="image-slider" data-mouse-down-at="0" data-prev-percentage="-20" data-percentage="0">
+        <img src="/static/images/pending.png" class="bigimage" id="{{ i }}bigimage" onclick="MoveDown('{{ i }}bigimage');" draggable="false">
+        {% for folio in folios %}
+        <div class="folio-item">
+            <p class="folioname">{{ folio.name }}</p>
+            <br>
+            <!-- Adding the images/descriptions -->
+            <div class="container">
+            <img src="/static/images/{{ folio.photo }}" class="image" draggable="false">
+            <div class="middle" onclick="ShowDescription('{{ folio.id }}')">
+                <div class="text" style="vertical-align:middle" onclick="console.log('Click');MoveUp('{{ i }}bigimage');"><span>Learn More </span></div>
+            </div>
         </div>
+            <p id="{{ folio.id }}" style="display: none;" class="foliodescription">{{ folio.description }}. <br><br> If you would like to learn even more about these folios use the dropdown menu.</p>
     </div>
-        <p id="{{ folio.id }}" style="display: none;" class="foliodescription">{{ folio.description }}. <br><br> If you would like to learn even more about these folios use the dropdown menu.</p>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
+
 <script>
 
 // Making the description and learn more show and hide on click of the folios
 
-    function ShowDescription(id){
-        var is_visible=false;
-        if(document.getElementById(id).style.display=='block'){
-            is_visible=true;
-        }
-        {% for folio in folios %}
-        document.getElementById('{{ folio.id }}').style.display='none';
-        {% endfor %}
-        if(!is_visible){
-            document.getElementById(id).style.display='block';
-        }
-    }
+//    function ShowDescription(id){
+//        var is_visible=false;
+//        if(document.getElementById(id).style.display=='block'){
+//            is_visible=true;
+//        }
+//        {% for folio in folios %}
+//        document.getElementById('{{ folio.id }}').style.display='none';
+//        {% endfor %}
+//        if(!is_visible){
+//            document.getElementById(id).style.display='block';
+//        }
+//    }
 
 // Making the page scroll with the movement of the mouse 
 
@@ -87,8 +90,27 @@
         window.ontouchmove = e => handleOnMove(e.touches[0]);
     
     // Making the image expand when clicked on //
-    
 
-
+        function MoveUp(id){
+            move_amount = 0;
+            handleOnMove();
+            const bigimage = document.getElementById(id),
+            thang = document.getElementById("slide-up");
+            bigimage.style.display = "block";
+            thang.animate({transform: `translate(0, -100%)` },
+            { duration: 1200, fill: "forwards", easing: 'ease-in-out' });
+        }
+        async function MoveDown(id){
+            move_amount = 1;
+            const bigimage = document.getElementById(id),
+            thang = document.getElementById("slide-up");
+            handleOnMove();
+            bigimage.style.display = "block";
+            const animTime = 1200;
+            thang.animate({transform: `translate(0, 0%)` },
+            { duration: 1200, fill: "forwards", easing: 'ease-in-out'});
+            await sleep(1200);
+            bigimage.style.display = "block";
+        }
     </script>
 {% endblock %}
