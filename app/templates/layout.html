@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Ed's Art</title>
+        <title>Ed's Art{% if title %} - {{ title }}{% endif %}</title>
         <link rel="stylesheet" href="/static/style.css">
     </head>
     <nav>
@@ -17,17 +17,17 @@
                 <!-- Dropdown box -->
 
                 <ul class= "dropdown">
-                    <li><a href = "/folios/1" class="hovernav"><span>Y9 </span></a></li>
                     <li><a href = "/folios/2" class="hovernav"><span>Y10 </span></a></li>
                     <li><a href = "/folios/3" class="hovernav"><span>Y11 </span></a></li>
                     <li><a href = "/folios/4" class="hovernav"><span>Y12 </span></a></li>
                     <li><a href = "/folios/5" class="hovernav"><span>Y13 Design </span></a></li>
-                    <li><a href = "/folios/6" class="hovernav"><span>Y13 Printmaking </span></a></li>
-                    <li><a href = "/folios/7" class="hovernav"><span>Y13 Photography </span></a></li>
+                    <li><a href = "/folios/6" class="hovernav"><span>Y13 Print </span></a></li>
+                    <li><a href = "/folios/7" class="hovernav"><span>Y13 Photo </span></a></li>
                 </ul>
             </li>
             <li><a href="/artists" class="hovernav"><span>Artists </span></a></li>
             <li><a href="/artwork" class="hovernav"><span>Artwork </span></a></li>
+            <li><a href="/account" class="hovernav"><span>Login </span></a></li>
             <li></li>
         </ul>
     </nav>

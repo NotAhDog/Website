@@ -101,7 +101,7 @@ ul li:hover ul.dropdown {
 
 .navbar-container{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(8, 1fr);
 }
 
 /* Making the folios page */
@@ -204,13 +204,14 @@ ul li:hover ul.dropdown {
 }
 
 .bigimage{
-    transform: translate(0, 0);
+    background-color: transparent;
+    padding-top: 50vh;
     margin:auto;
     display:none;
+    height: 60vh;
     max-width: 100vw;
     max-height: 100vh;
-    transition: all ease-in-out 1.2s;
-    z-index: 2;
+    z-index: 1;
 }
 
 /* Making the text centered */
@@ -330,4 +331,49 @@ ul li:hover ul.dropdown {
   margin-top: -440px;
   font-size: 20px;
   padding-bottom: 10px;
+}
+
+/* Login styling */
+
+.form{
+  padding-left: 30px;
+  padding-top: 10px;
+}
+
+.logintitle{
+  padding-left: 15px;
+  font-size: 25px;
+}
+
+.error{
+  background-color:#879EB0;
+  display:block;
+  color: rgb(255, 64, 64);
+  
+}
+
+.noaccount{
+  margin: auto;
+  padding-left: 15px;
+  font-size: 15px;
+  color: #C6D8D3;
+}
+
+.noaccount:link {
+  text-decoration: none;
+}
+
+.noaccount:visited {
+  text-decoration: none;
+}
+
+.noaccount:hover {
+  transition: 0.3s;
+  text-decoration: underline;
+  text-decoration-thickness: 2.5px;
+  color: #FDF0D5;
+}
+
+.noaccount:active {
+  text-decoration: underline;
 }

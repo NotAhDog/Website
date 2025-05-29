@@ -1,50 +1,55 @@
-<head>
-    <title>Ed's Art - Folios</title>
-</head>
 {% extends 'layout.html' %}
 {% block content %}
 <h1 class="title">Folios</h1>
 <div class="line"></div>
-<div id="slide-up">
+<div id="slide_up">
     <div class="folio-container" id="image-slider" data-mouse-down-at="0" data-prev-percentage="-20" data-percentage="0">
-        <img src="/static/images/pending.png" class="bigimage" id="{{ i }}bigimage" onclick="MoveDown('{{ i }}bigimage');" draggable="false">
-        {% for folio in folios %}
+        {% for folio in range(folio_num) %}
         <div class="folio-item">
-            <p class="folioname">{{ folio.name }}</p>
+            <p class="folioname">{{ folios[folio].name }}</p>
             <br>
             <!-- Adding the images/descriptions -->
             <div class="container">
-            <img src="/static/images/{{ folio.photo }}" class="image" draggable="false">
-            <div class="middle" onclick="ShowDescription('{{ folio.id }}')">
-                <div class="text" style="vertical-align:middle" onclick="console.log('Click');MoveUp('{{ i }}bigimage');"><span>Learn More </span></div>
+                <img src="/static/images/{{ folios[folio].photo }}" class="image" draggable="false">
+                <div class="middle" onclick="ShowDescription('{{ folios[folio].id }}')">
+                    <div class="text" style="vertical-align:middle" onclick="MoveUp('{{ folio }}bigimage');"><span>Learn More </span></div>
+                    <p id="{{ folios[folio].id }}" style="display: none;" class="foliodescription">{{ folios[folio].description }}. <br><br> If you would like to learn even more about these folios use the dropdown menu.</p>
+                </div>
             </div>
         </div>
-            <p id="{{ folio.id }}" style="display: none;" class="foliodescription">{{ folio.description }}. <br><br> If you would like to learn even more about these folios use the dropdown menu.</p>
-    </div>
         {% endfor %}
     </div>
+    {% for i in range(folio_num) %}
+    <img class="bigimage" id="{{ i }}bigimage" src="/static/images/{{ folios[i].photo }}" draggable="false" style="display: none;" onclick="MoveDown('{{ i }}bigimage');">
+    {% endfor %}
 </div>
 
 <script>
 
+    function sleep(ms){
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
 // Making the description and learn more show and hide on click of the folios
 
-//    function ShowDescription(id){
-//        var is_visible=false;
-//        if(document.getElementById(id).style.display=='block'){
-//            is_visible=true;
-//        }
-//        {% for folio in folios %}
-//        document.getElementById('{{ folio.id }}').style.display='none';
-//        {% endfor %}
-//        if(!is_visible){
-//            document.getElementById(id).style.display='block';
-//        }
-//    }
+    function ShowDescription(id){
+        var is_visible=false;
+        if(document.getElementById(id).style.display=='block'){
+            is_visible=true;
+        }
+        {% for folio in folios %}
+        document.getElementById('{{ folio.id }}').style.display='none';
+        {% endfor %}
+        if(!is_visible){
+            document.getElementById(id).style.display='block';
+        }
+    }
 
 // Making the page scroll with the movement of the mouse 
 
         const track = document.getElementById("image-slider");
+
+        var move_amount = 1;
 
         const handleOnDown = e => track.dataset.mouseDownAt = e.clientX;
 
@@ -55,8 +60,9 @@
 
         const handleOnMove = e => {
         if (track.dataset.mouseDownAt === "0") return;
+        
 
-        const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
+        const mouseDelta = parseFloat(track.dataset.mouseDownAt)*move_amount - e.clientX*move_amount,
         maxDelta = window.innerWidth / 1;
         const percentage = mouseDelta / maxDelta * -80,
         nextPercentageUnconstrained = parseFloat(track.dataset.prevPercentage) + percentage,
@@ -93,24 +99,21 @@
 
         function MoveUp(id){
             move_amount = 0;
-            handleOnMove();
-            const bigimage = document.getElementById(id),
-            thang = document.getElementById("slide-up");
+            const bigimage = document.getElementById(id);
+            slide_up = document.getElementById("slide_up");
             bigimage.style.display = "block";
-            thang.animate({transform: `translate(0, -100%)` },
-            { duration: 1200, fill: "forwards", easing: 'ease-in-out' });
+            slide_up.animate({transform: `translate(0, -60%)` },
+            {duration: 1200, fill: "forwards", easing: 'ease-in-out'});
         }
+        
         async function MoveDown(id){
             move_amount = 1;
-            const bigimage = document.getElementById(id),
-            thang = document.getElementById("slide-up");
-            handleOnMove();
-            bigimage.style.display = "block";
-            const animTime = 1200;
-            thang.animate({transform: `translate(0, 0%)` },
-            { duration: 1200, fill: "forwards", easing: 'ease-in-out'});
+            const bigimage = document.getElementById(id);
+            slide_up = document.getElementById("slide_up");
+            slide_up.animate({transform: `translate(0, 0%)`},    
+            {duration: 1200, fill: "forwards", easing: 'ease-in-out'});
             await sleep(1200);
-            bigimage.style.display = "block";
+            bigimage.style.display = "none";
         }
     </script>
 {% endblock %}

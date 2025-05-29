@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<h1 class="title">{{title}}</h1>
+
+<div class="line"></div>
+
+<br>
+
+<h2 class="logintitle">Signup:</h2>
+
+<form class="form" method="POST" action="/account">
+
+    {{ form.csrf_token }}
+    <!-- For protection from 'SEASURF' (CSRF) attacks.  Your homework
+       is to read up on this type of attack, and find out why it's
+       important to protect against them. -->
+
+    <!-- The username label and field -->
+    {{ form.username.label }} {% if form.username.flags.required %}<span style="color:rgb(255, 64, 64);font-weight: bolder;"> *</span>{% endif %} <br> {{ form.username }} <br /><br />
+
+        {# the next few lines display any and all errors on this 
+            form element only - each form element needs this #}
+        {% if form.username.errors %}
+            <ul class="errors">
+            {% for error in form.username.errors %}
+                <li class="error">{{ error }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+    <!-- The password label and field -->
+    <!-- you can use the following 'if' to determine if a field is required and show an asterisk (because HCI) -->
+    <!-- of course, your CSS will be done properly... right? -->
+    {{ form.password.label }}{% if form.password.flags.required %}<span style="color:rgb(255, 64, 64);font-weight: bolder;"> *</span>{% endif %}<br>{{ form.password }} <br><br> 
+    {{ form.confirmpass.label }}{% if form.confirmpass.flags.required %}<span style="color:rgb(255, 64, 64);font-weight: bolder;"> *</span>{% endif %}<br>
+    {{ form.confirmpass }}
+    <br /><br />
+        {% if form.confirmpass.errors %}
+            <ul class="errors">
+            {% for error in form.confirmpass.errors %}
+                <li class="error">{{ error }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    <br />
+    <!-- Check the terminal to see what the form returns -->
+    {{ form.submit }}
+    <br /><br >
+
+</form>
+
+{% endblock %}
