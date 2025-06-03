@@ -336,7 +336,7 @@ ul li:hover ul.dropdown {
 /* Login styling */
 
 .form{
-  padding-left: 30px;
+  padding-left: 40px;
   padding-top: 10px;
 }
 
@@ -376,4 +376,28 @@ ul li:hover ul.dropdown {
 
 .noaccount:active {
   text-decoration: underline;
+}
+
+.textbox{
+  background-color: #272932;
+  border-color: #C6D8D3;
+  color: #FDF0D5;
+  font-family: "Boldonse", system-ui;
+  border-style: solid;
+  padding: 10px;
+  margin-top: 10px;
+  border-width: 2.5px;
+  border-radius: 10px;
+}
+
+.submit{
+  background-color: #272932;
+  border-color: #C6D8D3;
+  color: #FDF0D5;
+  font-family: "Boldonse", system-ui;
+  border-style: solid;
+  padding: 10px;
+  margin-top: 10px;
+  border-width: 2.5px;
+  border-radius: 10px;
 }

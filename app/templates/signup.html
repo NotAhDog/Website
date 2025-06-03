@@ -17,7 +17,7 @@
        important to protect against them. -->
 
     <!-- The username label and field -->
-    {{ form.username.label }} {% if form.username.flags.required %}<span style="color:rgb(255, 64, 64);font-weight: bolder;"> *</span>{% endif %} <br> {{ form.username }} <br /><br />
+    {{ form.username.label }} {% if form.username.flags.required %}<span style="color:rgb(255, 64, 64);font-weight: bolder;"> *</span>{% endif %} <br> {{ form.username(class='textbox') }} <br /><br />
 
         {# the next few lines display any and all errors on this 
             form element only - each form element needs this #}
@@ -32,9 +32,9 @@
     <!-- The password label and field -->
     <!-- you can use the following 'if' to determine if a field is required and show an asterisk (because HCI) -->
     <!-- of course, your CSS will be done properly... right? -->
-    {{ form.password.label }}{% if form.password.flags.required %}<span style="color:rgb(255, 64, 64);font-weight: bolder;"> *</span>{% endif %}<br>{{ form.password }} <br><br> 
+    {{ form.password.label }}{% if form.password.flags.required %}<span style="color:rgb(255, 64, 64);font-weight: bolder;"> *</span>{% endif %}<br>{{ form.password(class='textbox') }} <br><br> 
     {{ form.confirmpass.label }}{% if form.confirmpass.flags.required %}<span style="color:rgb(255, 64, 64);font-weight: bolder;"> *</span>{% endif %}<br>
-    {{ form.confirmpass }}
+    {{ form.confirmpass(class='textbox') }}
     <br /><br />
         {% if form.confirmpass.errors %}
             <ul class="errors">
@@ -45,7 +45,7 @@
         {% endif %}
     <br />
     <!-- Check the terminal to see what the form returns -->
-    {{ form.submit }}
+    {{ form.submit(class='submit') }}
     <br /><br >
 
 </form>
