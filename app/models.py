@@ -2,26 +2,20 @@ from app.routes import db
 
 # Association Tables
 
-ArtistFolio = db.Table(
-    'ArtistFolio',
-    db.Column('artist_id', db.Integer, db.ForeignKey('Artist.id'), primary_key=True),
-    db.Column('folio_id', db.Integer, db.ForeignKey('Folio.id'), primary_key=True)
-)
-
-FolioLayout = db.Table(
-    'FolioLayout',
+Folio_Layout = db.Table(
+    'Folio_Layout',
     db.Column('folio_id', db.Integer, db.ForeignKey('Folio.id'), primary_key=True),
     db.Column('layout_id', db.Integer, db.ForeignKey('Layout.id'), primary_key=True)
 )
 
-ArtFolio = db.Table(
-    'ArtFolio',
+Art_Folio = db.Table(
+    'Art_Folio',
     db.Column('art_id', db.Integer, db.ForeignKey('Art.id'), primary_key=True),
     db.Column('folio_id', db.Integer, db.ForeignKey('Folio.id'), primary_key=True)
 )
 
-ArtMeaning = db.Table(
-    'ArtMeaning',
+Art_Meaning = db.Table(
+    'Art_Meaning',
     db.Column('art_id', db.Integer, db.ForeignKey('Art.id'), primary_key=True),
     db.Column('meaning_id', db.Integer, db.ForeignKey('Meaning.id'), primary_key=True)
 )
@@ -50,26 +44,11 @@ class Folio(db.Model):
     photo = db.Column(db.Text, nullable=False)
     theme_id = db.Column(db.Integer, db.ForeignKey('Theme.id'))
 
-    artists = db.relationship('Artist', secondary=ArtistFolio, back_populates='folios')
-    layouts = db.relationship('Layout', secondary=FolioLayout, back_populates='folios')
-    arts = db.relationship('Art', secondary=ArtFolio, back_populates='folios')
+    layouts = db.relationship('Layout', secondary=Folio_Layout, back_populates='folios')
+    arts = db.relationship('Art', secondary=Art_Folio, back_populates='folios')
 
     def __repr__(self):
         return f'Folio: {self.name}'
-
-
-class Artist(db.Model):
-    __tablename__ = "Artist"
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Text, nullable=False)
-    description = db.Column(db.Text)
-    photo = db.Column(db.Text)
-
-    folios = db.relationship('Folio', secondary=ArtistFolio, back_populates='artists')
-    arts = db.relationship("Art", backref="artist")
-
-    def __repr__(self):
-        return self.name
 
 
 class Layout(db.Model):
@@ -77,7 +56,7 @@ class Layout(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.Text, nullable=False)
 
-    folios = db.relationship('Folio', secondary=FolioLayout, back_populates='layouts')
+    folios = db.relationship('Folio', secondary=Folio_Layout, back_populates='layouts')
 
     def __repr__(self):
         return f'Layout {self.id}'
@@ -89,11 +68,10 @@ class Art(db.Model):
     name = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
     photo = db.Column(db.Text, nullable=False)
-    artist_id = db.Column(db.Integer, db.ForeignKey('Artist.id'))
     theme_id = db.Column(db.Integer, db.ForeignKey('Theme.id'))
 
-    meanings = db.relationship('Meaning', secondary=ArtMeaning, back_populates='arts')
-    folios = db.relationship('Folio', secondary=ArtFolio, back_populates='arts')
+    meanings = db.relationship('Meaning', secondary=Art_Meaning, back_populates='arts')
+    folios = db.relationship('Folio', secondary=Art_Folio, back_populates='arts')
 
     def __repr__(self):
         return f'Art: {self.name}'
@@ -104,7 +82,7 @@ class Meaning(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.Text, nullable=False)
 
-    arts = db.relationship('Art', secondary=ArtMeaning, back_populates='meanings')
+    arts = db.relationship('Art', secondary=Art_Meaning, back_populates='meanings')
 
     def __repr__(self):
         return self.description

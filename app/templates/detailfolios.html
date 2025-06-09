@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h1 class="title">{{folio.name}}</h1>
+
+<div class="line"></div>
+
+<br>
+<h3 class="foliotitle">{{folio.name}} description:</h3>
+<h3 class="foliodes">{{folio.description}}</h3><br>
+{% for layout in folio.layouts %}
+  <h3 class="foliodes">{{layout.description}}</h3><br>
+{% endfor %}
+<h3 class="foliodes">{{folio.theme.description}}</h3>
+<div class="folio-image-detailed">
+    <img src="/static/images/{{ folio.photo }}" class="folio-image" draggable="false">
+</div>
+
+<br>
+
+{% endblock %}

@@ -137,7 +137,7 @@ ul li:hover ul.dropdown {
   transition: .5s ease;
   opacity: 0;
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -196,6 +196,7 @@ ul li:hover ul.dropdown {
 .foliodescription{
   padding-top: 10px;
   padding-left: 20px;
+  background-color: transparent;
 }
 
 .folioname{
@@ -205,13 +206,43 @@ ul li:hover ul.dropdown {
 
 .bigimage{
     background-color: transparent;
-    padding-top: 50vh;
+    padding-top: 30vh;
     margin:auto;
     display:none;
     height: 60vh;
     max-width: 100vw;
     max-height: 100vh;
     z-index: 1;
+}
+
+.folio-image{
+  width: 1000px;
+  opacity: 1;
+  display: block;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  user-select: none;
+  -webkit-user-drag: none;
+  box-shadow: 10px 10px;
+}
+
+.folio-image-detailed{
+  padding-right: 45%;
+  margin-top: -15%;
+}
+
+.foliodes{
+  margin: auto;
+  padding-left: 55%;
+  font-size: 15px;
+  margin-right: 100px;
+}
+
+.foliotitle{
+  margin: auto;
+  padding-left: 53.5%;
+  font-size: 20px;
+  padding-bottom: 10px;
 }
 
 /* Making the text centered */
@@ -402,4 +433,31 @@ ul li:hover ul.dropdown {
   margin-top: 10px;
   border-width: 2.5px;
   border-radius: 10px;
+}
+
+/* Project page styling */
+
+.leaversbookpages1{
+  width: 500px;
+  opacity: 1;
+  display: block;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  user-select: none;
+  -webkit-user-drag: none;
+  box-shadow: 10px 10px;
+  margin-top: -7.5%;
+}
+
+.leaversbookpages2{
+  width: 500px;
+  opacity: 1;
+  display: block;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  user-select: none;
+  -webkit-user-drag: none;
+  box-shadow: 10px 10px;
+  margin-top: -24.44%;
+  margin-left: 65%;
 }

@@ -11,9 +11,9 @@
             <!-- Adding the images/descriptions -->
             <div class="container">
                 <img src="/static/images/{{ folios[folio].photo }}" class="image" draggable="false">
-                <div class="middle" onclick="ShowDescription('{{ folios[folio].id }}')">
-                    <div class="text" style="vertical-align:middle" onclick="MoveUp('{{ folio }}bigimage');"><span>Learn More </span></div>
-                    <p id="{{ folios[folio].id }}" style="display: none;" class="foliodescription">{{ folios[folio].description }}. <br><br> If you would like to learn even more about these folios use the dropdown menu.</p>
+                <p id="{{ folios[folio].id }}" style="display: block;" class="foliodescription">{{ folios[folio].description }}. <br><br> If you would like to learn even more about these folios use the dropdown menu.</p>
+                <div class="middle">
+                    <div class="text" style="vertical-align:middle" onclick="MoveUp('{{ folio }}bigimage');"><span>View folio </span></div>
                 </div>
             </div>
         </div>
@@ -30,20 +30,6 @@
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-// Making the description and learn more show and hide on click of the folios
-
-    function ShowDescription(id){
-        var is_visible=false;
-        if(document.getElementById(id).style.display=='block'){
-            is_visible=true;
-        }
-        {% for folio in folios %}
-        document.getElementById('{{ folio.id }}').style.display='none';
-        {% endfor %}
-        if(!is_visible){
-            document.getElementById(id).style.display='block';
-        }
-    }
 
 // Making the page scroll with the movement of the mouse 
 

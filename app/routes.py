@@ -37,11 +37,10 @@ def all_folios():
     return render_template('folios.html', folios=folios, title=title, folio_num=len(folios))
 
 
-@app.route('/artists')  # Artists page
+@app.route('/projects')  # projects page
 def all_artists():
-    title = "Artists"
-    artists = models.Artist.query.all()
-    return render_template('artists.html', artists=artists, title=title)
+    title = "Projects"
+    return render_template('projects.html',  title=title)
 
 
 @app.route('/artwork')  # Artwork page
@@ -51,10 +50,13 @@ def all_arts():
     return render_template('artwork.html', arts=arts, title=title)
 
 
-@app.route('/folio/<int:id>')
+@app.route('/folios/<int:id>')
 def folio(id):
-    folio = models.Folio.query.get_or_404(id)
-    return render_template('folios.html', folio=folio, artists=folio.artists, layouts=folio.layouts, arts=folio.arts)
+    folio = models.Folio.query.options(
+        db.joinedload(models.Folio.theme),
+        db.joinedload(models.Folio.layouts)
+    ).get_or_404(id)
+    return render_template('detailfolios.html', folio=folio, arts=folio.arts)
 
 
 @app.route('/artist/<int:id>')
