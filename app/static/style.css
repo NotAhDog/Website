@@ -29,11 +29,17 @@ ul {
     margin: auto;
     padding: 0;
     background-color: #272932;
+    border-color: #C6D8D3;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 5px;
     position: static;
-    width: 100%;
+    width: 75%;
 }
   
-
+.break{
+  padding-bottom: 10px;
+}
 
 ul li{
     display: inline-block;
@@ -101,7 +107,7 @@ ul li:hover ul.dropdown {
 
 .navbar-container{
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(7, 1fr);
 }
 
 /* Making the folios page */
@@ -263,14 +269,15 @@ ul li:hover ul.dropdown {
 /* Text styling */
 
 .footer{
-  margin: auto;
+  margin-left: 37.1%;
+  margin-top: -20px;
   text-align: center;
   padding: 5px;
   background-color: #272932;
   color: #FDF0D5;
   width: 500px;
   font-size: 20px;
-  height: 1000px;
+  height: 500px;
   border-style: solid;
   border-color: #C6D8D3;
   border-width: 4px;
@@ -460,4 +467,48 @@ ul li:hover ul.dropdown {
   box-shadow: 10px 10px;
   margin-top: -24.44%;
   margin-left: 65%;
+}
+
+.page1heading{
+  font-size: 15px;
+  margin-top: -225px;
+  padding-left: 37.75%;
+  padding-bottom: 8%;
+}
+
+.page2heading{
+  font-size: 15px;
+  margin-top: -225px;
+  padding-left: 65%;
+  padding-bottom: 9.5%;
+}
+
+/* dashboard styling */
+
+.radio{
+  background-color: #272932;
+  border-color: #C6D8D3;
+  color: #FDF0D5;
+  font-family: "Boldonse", system-ui;
+  border-style: solid;
+  padding: 10px;
+  padding-right: 50px;
+  padding-left: 25px;
+  margin-top: 10px;
+  border-width: 2.5px;
+  border-radius: 10px;
+  max-width: fit-content;
+  margin-left: 0px;
+}
+
+.dashtextbox{
+  background-color: #272932;
+  border-color: #C6D8D3;
+  color: #FDF0D5;
+  font-family: "Boldonse", system-ui;
+  border-style: solid;
+  padding: 10px;
+  margin-top: 10px;
+  border-width: 2.5px;
+  border-radius: 10px;
 }

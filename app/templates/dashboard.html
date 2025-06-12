@@ -5,4 +5,60 @@
 <div class="line"></div>
 
 <br>
+
+<form class="form" method="POST">
+
+    {{ form.csrf_token }}
+    <!-- For protection from 'SEASURF' (CSRF) attacks.  Your homework
+       is to read up on this type of attack, and find out why it's
+       important to protect against them. -->
+
+
+    {{ form.look.label }} {% if form.look.flags.required %}<span style="color:rgb(255, 64, 64);font-weight: bolder;"> *</span>{% endif %} <br> {{ form.look(class='dashtextbox', size=50) }} <br /><br />
+
+        {# the next few lines display any and all errors on this 
+            form element only - each form element needs this #}
+        {% if form.look.errors %}
+            <ul class="errors">
+            {% for error in form.look.errors %}
+                <li class="error">{{ error }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+
+    {{ form.additions.label }}{% if form.additions.flags.required %}<span style="color:rgb(255, 64, 64);font-weight: bolder;"> *</span>{% endif %}<br>{{ form.additions(class='dashtextbox', size=50) }} <br><br> 
+        {% if form.additions.errors %}
+            <ul class="errors">
+            {% for error in form.additions.errors %}
+                <li class="error">{{ error }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    <div>
+        {{ form.easytouse.label }}{% if form.easytouse.flags.required %}<span style="color:rgb(255, 64, 64);font-weight: bolder;"> *</span>{% endif %}
+        {{ form.easytouse(class='radio') }}
+        {% if form.easytouse.errors %}
+            <ul class="errors">
+            {% for error in form.easytouse.errors %}
+                <li class="error">{{ error }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </div><br>
+    
+    {{ form.other.label }}{% if form.other.flags.required %}<span style="color:rgb(255, 64, 64);font-weight: bolder;"> *</span>{% endif %}<br>{{ form.other(class='dashtextbox', size=50) }} <br><br> 
+        {% if form.other.errors %}
+            <ul class="errors">
+            {% for error in form.other.errors %}
+                <li class="error">{{ error }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+    {{ form.submit(class='submit') }}
+    <br /><br />
+
+</form>
+
 {% endblock %}

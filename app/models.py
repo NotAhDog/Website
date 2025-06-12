@@ -8,18 +8,6 @@ Folio_Layout = db.Table(
     db.Column('layout_id', db.Integer, db.ForeignKey('Layout.id'), primary_key=True)
 )
 
-Art_Folio = db.Table(
-    'Art_Folio',
-    db.Column('art_id', db.Integer, db.ForeignKey('Art.id'), primary_key=True),
-    db.Column('folio_id', db.Integer, db.ForeignKey('Folio.id'), primary_key=True)
-)
-
-Art_Meaning = db.Table(
-    'Art_Meaning',
-    db.Column('art_id', db.Integer, db.ForeignKey('Art.id'), primary_key=True),
-    db.Column('meaning_id', db.Integer, db.ForeignKey('Meaning.id'), primary_key=True)
-)
-
 # Models
 
 
@@ -30,7 +18,6 @@ class Theme(db.Model):
     description = db.Column(db.Text, nullable=False)
 
     folios = db.relationship("Folio", backref="theme")
-    arts = db.relationship("Art", backref="theme")
 
     def __repr__(self):
         return self.name
@@ -45,7 +32,6 @@ class Folio(db.Model):
     theme_id = db.Column(db.Integer, db.ForeignKey('Theme.id'))
 
     layouts = db.relationship('Layout', secondary=Folio_Layout, back_populates='folios')
-    arts = db.relationship('Art', secondary=Art_Folio, back_populates='folios')
 
     def __repr__(self):
         return f'Folio: {self.name}'
@@ -62,27 +48,24 @@ class Layout(db.Model):
         return f'Layout {self.id}'
 
 
-class Art(db.Model):
-    __tablename__ = "Art"
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Text, nullable=False)
-    description = db.Column(db.Text, nullable=False)
-    photo = db.Column(db.Text, nullable=False)
-    theme_id = db.Column(db.Integer, db.ForeignKey('Theme.id'))
-
-    meanings = db.relationship('Meaning', secondary=Art_Meaning, back_populates='arts')
-    folios = db.relationship('Folio', secondary=Art_Folio, back_populates='arts')
-
-    def __repr__(self):
-        return f'Art: {self.name}'
-
-
 class Meaning(db.Model):
     __tablename__ = "Meaning"
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.Text, nullable=False)
 
-    arts = db.relationship('Art', secondary=Art_Meaning, back_populates='meanings')
-
     def __repr__(self):
         return self.description
+
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(150), unique=True, nullable=False)
+    password = db.Column(db.String(200), nullable=False)
+
+
+class Feedback(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    look = db.Column(db.String(150), nullable=False)
+    addition = db.Column(db.String(150), nullable=False)
+    easytouse = db.Column(db.String(150), nullable=False)
+    other = db.Column(db.Text)
