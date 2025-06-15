@@ -164,6 +164,8 @@ def dashboard():
             print(form.errors)
             print('-------------------------------')
 
+        submittedforms = Feedback.query.filter_by(user_id).all()
+
         newform = Feedback(look=looks, addition=additions,
                            easytouse=easytouse, other=other)
         db.session.add(newform)

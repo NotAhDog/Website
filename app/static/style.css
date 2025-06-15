@@ -512,3 +512,9 @@ ul li:hover ul.dropdown {
   border-width: 2.5px;
   border-radius: 10px;
 }
+
+.submittedforms{
+  margin-left: 40%;
+  margin-top: -580px;
+  font-size: 15px;
+}

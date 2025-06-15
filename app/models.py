@@ -62,6 +62,11 @@ class User(db.Model):
     username = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
 
+    user = db.relationship("User", backref="Feedback")
+
+    def __repr__(self):
+        return f'User {self.id}'
+
 
 class Feedback(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -69,3 +74,4 @@ class Feedback(db.Model):
     addition = db.Column(db.String(150), nullable=False)
     easytouse = db.Column(db.String(150), nullable=False)
     other = db.Column(db.Text)
+    user_id = db.Column(db.Integer, db.ForeignKey('User.id'))
