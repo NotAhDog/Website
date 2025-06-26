@@ -26,7 +26,11 @@
                 </ul>
             </li>
             <li><a href="/projects" class="hovernav"><span>Projects </span></a></li>
+            {% if login %}
+            <li><a href="/dashboard" class="hovernav"><span>Dashboard </span></a></li>
+            {% else %}
             <li><a href="/account" class="hovernav"><span>Login </span></a></li>
+            {% endif %}
             <li></li>
         </ul>
     </nav>

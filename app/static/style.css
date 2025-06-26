@@ -517,4 +517,27 @@ ul li:hover ul.dropdown {
   margin-left: 40%;
   margin-top: -580px;
   font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.submittedformtext{
+  font-size: 15px;
+  background-color: transparent;
+}
+
+.deletebutton{
+  font-size: 20px;
+  background-color: transparent;
+  color: rgb(255, 64, 64);
+}
+
+.box{
+  margin-left: 42%;
+  width: fit-content;
+  height: fit-content;
+  background-color: #C6D8D3;
+  border-style: solid;
+  border-radius: 10px;
+  border-color: #272932;
+  padding: 3px;
 }

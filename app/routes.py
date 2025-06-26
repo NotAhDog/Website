@@ -1,5 +1,5 @@
 from app import app
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from .forms import LoginForm, SignupForm, FeedbackForm
 from flask_sqlalchemy import SQLAlchemy
 import os
@@ -18,32 +18,39 @@ from app.models import User, Feedback
 app.secret_key = 'CorrectHorseBatteryStaple'
 
 
+def GetLogin():
+    username = session.get('username')
+    if username:
+        return True
+    return False
+
+
 # --- Routes ---
 
 
 @app.route('/', methods=['GET', 'POST'])  # Home page
 def root():
     print(request.args.get('user'))
-    return render_template('home.html', page_title='HOME')
+    return render_template('home.html', page_title='HOME', login=GetLogin())
 
 
 @app.route('/about')  # About page
 def about():
     title = "About"
-    return render_template('about.html', page_title='ABOUT', title=title)
+    return render_template('about.html', page_title='ABOUT', title=title, login=GetLogin())
 
 
 @app.route('/folios')  # Folios page
 def all_folios():
     title = "Folios"
     folios = models.Folio.query.all()
-    return render_template('folios.html', folios=folios, title=title, folio_num=len(folios))
+    return render_template('folios.html', folios=folios, title=title, folio_num=len(folios), login=GetLogin())
 
 
 @app.route('/projects')  # projects page
 def all_artists():
     title = "Projects"
-    return render_template('projects.html',  title=title)
+    return render_template('projects.html',  title=title, login=GetLogin())
 
 
 @app.route('/folios/<int:id>')
@@ -52,26 +59,26 @@ def folio(id):
         db.joinedload(models.Folio.theme),
         db.joinedload(models.Folio.layouts)
     ).get_or_404(id)
-    return render_template('detailfolios.html', folio=folio)
+    return render_template('detailfolios.html', folio=folio, login=GetLogin())
 
 
 @app.route('/artist/<int:id>')
 def artist(id):
     artist = models.Artist.query.get_or_404(id)
-    return render_template('artist.html', artist=artist)
+    return render_template('artist.html', artist=artist, login=GetLogin())
 
 
 @app.route('/art/<int:id>')
 def art(id):
     title = "Art - <int:id>"
     art = models.Art.query.get_or_404(id)
-    return render_template('art.html', art=art, meanings=art.meanings, folios=art.folios, title=title)
+    return render_template('art.html', art=art, meanings=art.meanings, folios=art.folios, title=title, login=GetLogin())
 
 
 @app.route('/secret')  # Secret page
 def secret():
     title = "Secret"
-    return render_template('secret.html', title=title)
+    return render_template('secret.html', title=title, login=GetLogin())
 
 
 @app.route('/account', methods=['GET', 'POST'])  # Login page
@@ -94,6 +101,8 @@ def login():
             print(form.errors)
             print('-------------------------------')
 
+        session['username'] = username
+
         account = User.query.filter_by(username=username).first()
 
         if account and check_password_hash(account.password, password):
@@ -101,7 +110,7 @@ def login():
         else:
             flash("Invalid username or password", "danger")
 
-    return render_template('login.html', form=form, title=title)
+    return render_template('login.html', form=form, title=title, login=GetLogin())
 
 
 @app.route('/signup', methods=['GET', 'POST'])  # Signup page
@@ -137,11 +146,14 @@ def signup():
             flash("Account created successfully!", "success")
             return redirect(url_for('login'))  # Redirect to login page
 
-    return render_template('signup.html', form=form, title=title)
+    return render_template('signup.html', form=form, title=title, login=GetLogin())
 
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
+    user_id = models.User.query.filter_by(username=session.get('username')).first().id
+    print(user_id, "uid")
+    submittedforms = Feedback.query.filter_by(user_id=user_id).all()
     title = "Dashboard"
     form = FeedbackForm()
     if request.method == "GET":
@@ -164,15 +176,14 @@ def dashboard():
             print(form.errors)
             print('-------------------------------')
 
-        submittedforms = Feedback.query.filter_by(user_id).all()
-
         newform = Feedback(look=looks, addition=additions,
                            easytouse=easytouse, other=other)
         db.session.add(newform)
         db.session.commit()
         flash("Form Submitted!", "success")
 
-    return render_template('dashboard.html', title=title, form=form)
+    return render_template('dashboard.html', title=title, form=form, login=GetLogin(),
+                           submittedforms=submittedforms)
 
 
 @app.errorhandler(404)

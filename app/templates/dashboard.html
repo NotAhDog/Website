@@ -63,4 +63,16 @@
 
 <h3 class="submittedforms">Your submitted forms:</h3>
 
+<div class="box">
+{% for form_ in submittedforms %}
+<p class="submittedformtext">{{ form_.look }}</p>
+<p class="submittedformtext">{{ form_.addition }}</p>
+<p class="submittedformtext">{{ form_.easytouse }}</p>
+<p class="submittedformtext">{{ form_.other }}</p>
+<h3 class="deletebutton">Delete</h3>
+<br>
+{% endfor %}
+</div>
+
+
 {% endblock %}
