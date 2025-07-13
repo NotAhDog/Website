@@ -177,7 +177,8 @@ def dashboard():
             print('-------------------------------')
 
         newform = Feedback(look=looks, addition=additions,
-                           easytouse=easytouse, other=other)
+                           easytouse=easytouse, other=other,
+                           user_id=user_id)
         db.session.add(newform)
         db.session.commit()
         flash("Form Submitted!", "success")
@@ -185,6 +186,10 @@ def dashboard():
     return render_template('dashboard.html', title=title, form=form, login=GetLogin(),
                            submittedforms=submittedforms)
 
+@app.route('/logout', methods=['GET'])
+def logout():
+    session['username'] = None
+    return redirect(url_for('root'))
 
 @app.errorhandler(404)
 def page_not_found(e):

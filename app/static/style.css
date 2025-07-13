@@ -532,12 +532,28 @@ ul li:hover ul.dropdown {
 }
 
 .box{
-  margin-left: 42%;
+  margin-left: 43%;
   width: fit-content;
-  height: fit-content;
+  height: 60%;
   background-color: #C6D8D3;
   border-style: solid;
   border-radius: 10px;
   border-color: #272932;
   padding: 3px;
+  overflow: auto;
+}
+
+.logout{
+  background-color: #272932;
+  border-color: #C6D8D3;
+  color: #FDF0D5;
+  font-family: "Boldonse", system-ui;
+  border-style: solid;
+  padding: 10px;
+  padding-right: 25px;
+  padding-left: 25px;
+  margin-top: 10px;
+  border-width: 2.5px;
+  border-radius: 10px;
+  width: fit-content;
 }
