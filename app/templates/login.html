@@ -29,11 +29,14 @@
             </ul>
         {% endif %}
 
+
     <!-- The password label and field -->
     <!-- you can use the following 'if' to determine if a field is required and show an asterisk (because HCI) -->
     <!-- of course, your CSS will be done properly... right? -->
     {{ form.password.label }}{% if form.password.flags.required %}<span style="color:rgb(255, 64, 64);font-weight: bolder;"> *</span>{% endif %}<br>{{ form.password(class='textbox') }} <br><br> 
-
+        {% if error %}
+        <p class="error">Username or Password is incorrect.</p>
+        {% endif %}
     <!-- Check the terminal to see what the form returns -->
     {{ form.submit(class='submit') }}
     <br /><br />

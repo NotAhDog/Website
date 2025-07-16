@@ -22,12 +22,11 @@
         {# the next few lines display any and all errors on this 
             form element only - each form element needs this #}
         {% if form.username.errors %}
-            <ul class="errors">
             {% for error in form.username.errors %}
-                <li class="error">{{ error }}</li>
+                <p class="error">{{ error }}</p>
             {% endfor %}
-            </ul>
         {% endif %}
+
 
     <!-- The password label and field -->
     <!-- you can use the following 'if' to determine if a field is required and show an asterisk (because HCI) -->
@@ -37,12 +36,13 @@
     {{ form.confirmpass(class='textbox') }}
     <br /><br />
         {% if form.confirmpass.errors %}
-            <ul class="errors">
             {% for error in form.confirmpass.errors %}
-                <li class="error">{{ error }}</li>
+                <p class="error">{{ error }}</p>
             {% endfor %}
-            </ul>
         {% endif %}
+        {% for error in errors %}
+            <p class="error">{{ error }}</p>
+        {% endfor %}
     <br />
     <!-- Check the terminal to see what the form returns -->
     {{ form.submit(class='submit') }}

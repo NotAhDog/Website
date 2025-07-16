@@ -83,6 +83,7 @@ def secret():
 
 @app.route('/account', methods=['GET', 'POST'])  # Login page
 def login():
+    error = False
     title = "Login"
     form = LoginForm()
     if request.method == "GET":
@@ -101,20 +102,21 @@ def login():
             print(form.errors)
             print('-------------------------------')
 
-        session['username'] = username
-
         account = User.query.filter_by(username=username).first()
 
         if account and check_password_hash(account.password, password):
+            session['username'] = username
             return redirect(url_for('dashboard'))  # or wherever
         else:
+            error = True
             flash("Invalid username or password", "danger")
 
-    return render_template('login.html', form=form, title=title, login=GetLogin())
+    return render_template('login.html', form=form, title=title, login=GetLogin(), error=error)
 
 
 @app.route('/signup', methods=['GET', 'POST'])  # Signup page
 def signup():
+    errors = []
     title = "Signup"
     form = SignupForm()
     if request.method == "GET":
@@ -127,6 +129,18 @@ def signup():
             print(f"Username: {form.username.data}")
             print(f"Password: {form.password.data}")
             print('-------------------------------')
+            existing_user = User.query.filter_by(username=username).first()
+            if existing_user:
+                errors.append("Username already exists")
+                flash("Username already taken. Try another one.", "danger")
+            else:
+                # Hash the password before saving
+                hashed_password = generate_password_hash(password)
+                new_user = User(username=username, password=hashed_password)
+                db.session.add(new_user)
+                db.session.commit()
+                flash("Account created successfully!", "success")
+                return redirect(url_for('login'))  # Redirect to login page
         else:  # a validator failed... lets see which one(s)
             print('-------------------------------')
             print('ERROR:')
@@ -134,19 +148,8 @@ def signup():
             print('-------------------------------')
 
         # Check if user already exists
-        existing_user = User.query.filter_by(username=username).first()
-        if existing_user:
-            flash("Username already taken. Try another one.", "danger")
-        else:
-            # Hash the password before saving
-            hashed_password = generate_password_hash(password)
-            new_user = User(username=username, password=hashed_password)
-            db.session.add(new_user)
-            db.session.commit()
-            flash("Account created successfully!", "success")
-            return redirect(url_for('login'))  # Redirect to login page
 
-    return render_template('signup.html', form=form, title=title, login=GetLogin())
+    return render_template('signup.html', form=form, title=title, login=GetLogin(), errors=errors)
 
 
 @app.route('/dashboard', methods=['GET', 'POST'])
@@ -159,29 +162,44 @@ def dashboard():
     if request.method == "GET":
         print("\n\nLOADING PAGE\n\n")
     else:
-        if form.validate_on_submit():
-            looks = form.look.data
-            additions = form.additions.data
-            easytouse = form.easytouse.data
-            other = form.other.data
-            print('-------------------------------')
-            print(f"Looks: {form.look.data}")
-            print(f"Additions: {form.additions.data}")
-            print(f"Easy to use: {form.easytouse.data}")
-            print(f"Other feedback: {form.other.data}")
-            print('-------------------------------')
-        else:
-            print('-------------------------------')
-            print('ERROR:')
-            print(form.errors)
-            print('-------------------------------')
+        try:
+            id_to_delete = request.form['delete_id']
+            form_to_delete = Feedback.query.filter_by(id=id_to_delete).first()
+            db.session.delete(form_to_delete)
+            db.session.commit()
+        except:
+            if form.validate_on_submit():
+                    looks = form.look.data
+                    additions = form.additions.data
+                    easytouse = form.easytouse.data
+                    other = form.other.data
+                    print('-------------------------------')
+                    print(f"Looks: {form.look.data}")
+                    print(f"Additions: {form.additions.data}")
+                    print(f"Easy to use: {form.easytouse.data}")
+                    print(f"Other feedback: {form.other.data}")
+                    print('-------------------------------')
+                    newform = Feedback(look=looks, addition=additions,
+                                    easytouse=easytouse, other=other,
+                                    user_id=user_id)
+                    makeForm = True
+                    for form_ in submittedforms:
+                        if form_ == newform:
+                            makeForm = False
 
-        newform = Feedback(look=looks, addition=additions,
-                           easytouse=easytouse, other=other,
-                           user_id=user_id)
-        db.session.add(newform)
-        db.session.commit()
-        flash("Form Submitted!", "success")
+                    if makeForm:
+                        db.session.add(newform)
+                        db.session.commit()
+                        flash("Form Submitted!", "success")
+            else:
+                print('-------------------------------')
+                print('ERROR:')
+                print(form.errors)
+                print('-------------------------------')
+        
+
+        submittedforms = Feedback.query.filter_by(user_id=user_id).all()
+
 
     return render_template('dashboard.html', title=title, form=form, login=GetLogin(),
                            submittedforms=submittedforms)

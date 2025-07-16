@@ -557,3 +557,27 @@ ul li:hover ul.dropdown {
   border-radius: 10px;
   width: fit-content;
 }
+
+.delete{
+  background-color: transparent;
+  border: none;
+}
+
+.deletebutton:link {
+  text-decoration: none;
+}
+
+.deletebutton:visited {
+  text-decoration: none;
+}
+
+.deletebutton:hover{
+  transition: 0.3s;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  color: rgb(169, 31, 31);
+}
+
+.deletebutton:active{
+  text-decoration: underline;
+}
