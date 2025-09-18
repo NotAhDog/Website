@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, IntegerField, SubmitField, RadioField
-from wtforms.validators import Optional, DataRequired, Length, EqualTo
+from wtforms import StringField, PasswordField, SubmitField, RadioField
+from wtforms.validators import DataRequired, Length, EqualTo
 
 
 class LoginForm(FlaskForm):
@@ -8,7 +8,9 @@ class LoginForm(FlaskForm):
                            validators=[DataRequired(),
                                        Length(min=3,
                                               max=20,
-                                              message="Enter something between 3 and 20 characters")],
+                                              message="Enter a username "
+                                                      "between 3 and 20 "
+                                                      "characters")],
                            render_kw={"placeholder": "Username..."}
                            )
 
@@ -16,7 +18,9 @@ class LoginForm(FlaskForm):
                              validators=[DataRequired(),
                                          Length(min=5,
                                                 max=25,
-                                                message="Enter something between 5 and 25 characters")],            
+                                                message="Enter a password "
+                                                "between 5 and 25 "
+                                                "characters")],
                              render_kw={"placeholder": "Password..."},
                              )
 
@@ -29,7 +33,8 @@ class SignupForm(FlaskForm):
                            validators=[DataRequired(),
                                        Length(min=3,
                                               max=20,
-                                              message="Enter something between 3 and 20 characters")],
+                                              message="Enter a username "
+                                              "between 3 and 20 characters")],
                            render_kw={"placeholder": "Enter a username..."}
                            )
 
@@ -37,17 +42,25 @@ class SignupForm(FlaskForm):
                              validators=[DataRequired(),
                                          Length(min=5,
                                                 max=25,
-                                                message="Enter something between 5 an 25 characters")],
+                                                message="Enter a password "
+                                                "between 5 an 25 characters")],
                              render_kw={"placeholder": "Enter a password..."}
                              )
 
-    confirmpass = PasswordField('Repeat Your Password',  # Making sure they entered the correct password
+    confirmpass = PasswordField('Repeat Your Password',  # Making sure they
+                                                         # entered the correct
+                                                         # password
                                 validators=[DataRequired(),
-                                            EqualTo('password', message="These passwords dont match"),
+                                            EqualTo('password', message=""
+                                            "These passwords don't match"),
                                             Length(min=5,
                                                    max=25,
-                                                   message="Enter something that matches the password and is between 5 and 25 characters")],
-                                render_kw={"placeholder": "Repeat the password..."}
+                                                   message="Enter something "
+                                                   "that matches the password "
+                                                   "and is between 5 and 25 "
+                                                   "characters")],
+                                render_kw={"placeholder": ""
+                                           "Repeat the password..."}
                                 )
 
     submit = SubmitField('Submit')
@@ -58,16 +71,20 @@ class FeedbackForm(FlaskForm):
                        validators=[DataRequired(),
                                    Length(min=3,
                                           max=50,
-                                          message="Enter something between 3 and 50 characters")],
-                       render_kw={"placeholder": "Do you like how the website looks?"}
+                                          message="Enter something between 3 "
+                                          "and 50 characters")],
+                       render_kw={"placeholder": ""
+                                  "Do you like how the website looks?"}
                        )
 
     additions = StringField('Do you have any additions for the website?',
                             validators=[DataRequired(),
                                         Length(min=3,
                                                max=50,
-                                               message="Enter something between 3 and 50 characters")],
-                            render_kw={"placeholder": "Is there anything that could be added or changed?"}
+                                               message="Enter something "
+                                               "between 3 and 50 characters")],
+                            render_kw={"placeholder": "Is there anything that "
+                                       "could be added or changed?"}
                             )
 
     easytouse = RadioField(u'Is the website easy to use?',

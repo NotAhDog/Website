@@ -27,9 +27,11 @@
             </li>
             <li><a href="/projects" class="hovernav"><span>Projects </span></a></li>
             {% if login %}
-            <li><a href="/dashboard" class="hovernav"><span>Dashboard </span></a></li>
+            <li><a href="/dashboard" class="hovernav"><span>{{login}} </span></a></li>
+            <li><a href="/logout" class="hovernav"><span>Logout </span></a></li>
             {% else %}
-            <li><a href="/account" class="hovernav"><span>Login </span></a></li>
+            <li><a href="/login" class="hovernav"><span>Login </span></a></li>
+            <li><a href="/signup" class="hovernav"><span>Sign up </span></a></li>
             {% endif %}
             <li></li>
         </ul>

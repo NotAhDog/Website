@@ -4,8 +4,10 @@ from app.routes import db
 
 Folio_Layout = db.Table(
     'Folio_Layout',
-    db.Column('folio_id', db.Integer, db.ForeignKey('Folio.id'), primary_key=True),
-    db.Column('layout_id', db.Integer, db.ForeignKey('Layout.id'), primary_key=True)
+    db.Column('folio_id', db.Integer, db.ForeignKey('Folio.id'),
+              primary_key=True),
+    db.Column('layout_id', db.Integer, db.ForeignKey('Layout.id'),
+              primary_key=True)
 )
 
 # Models
@@ -31,7 +33,8 @@ class Folio(db.Model):
     photo = db.Column(db.Text, nullable=False)
     theme_id = db.Column(db.Integer, db.ForeignKey('Theme.id'))
 
-    layouts = db.relationship('Layout', secondary=Folio_Layout, back_populates='folios')
+    layouts = db.relationship('Layout', secondary=Folio_Layout,
+                              back_populates='folios')
 
     def __repr__(self):
         return f'Folio: {self.name}'
@@ -42,7 +45,8 @@ class Layout(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.Text, nullable=False)
 
-    folios = db.relationship('Folio', secondary=Folio_Layout, back_populates='layouts')
+    folios = db.relationship('Folio', secondary=Folio_Layout,
+                             back_populates='layouts')
 
     def __repr__(self):
         return f'Layout {self.id}'

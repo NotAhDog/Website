@@ -61,10 +61,9 @@
 
 </form>
 
+{% if submittedforms %}
 <h3 class="submittedforms">Your submitted forms:</h3>
-{% if form %}
-<div class="box" display="block">
-{% endif %}
+<div class="box">
 {% for form_ in submittedforms %}
 <form method="POST" action="">
     <p class="submittedformtext">{{ form_.look }}</p>
@@ -77,7 +76,5 @@
 </form>
 {% endfor %}
 </div><br>
-
-<a href="/logout" style="text-decoration: none;"><h3 class="logout">Logout</h3></a>
-
+{% endif %}
 {% endblock %}

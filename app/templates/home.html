@@ -2,6 +2,16 @@
 {% block content %}
 <h1 class="title">Home</h1>
 <div class="line"></div>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flashes" id="dismiss">
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    <button class="submit" onclick="dismiss();">Dismiss</button>
+    </ul>
+  {% endif %}
+{% endwith %}
 <h3 class="textheading">
     Basic Introduction
 </h3>
@@ -34,5 +44,13 @@
     Click this link:
     <a href="/about" class="extratext"><span>About Page</span></a>
 </h4>
+
 <img src=/static/images/profile.jpg class="profilepicture">
+
+<script>
+    function dismiss() {
+        document.getElementById("dismiss").style.display = "none";
+    }
+</script>
+
 {% endblock %}

@@ -20,7 +20,10 @@
         {% endfor %}
     </div>
     {% for i in range(folio_num) %}
-    <img class="bigimage" id="{{ i }}bigimage" src="/static/images/{{ folios[i].photo }}" draggable="false" style="display: none;" onclick="MoveDown('{{ i }}bigimage');">
+    <div id="{{ i }}bigimage" class="bigimage" style="padding-top: 30vh;display:none;">
+        <img class="bigimage" src="/static/images/{{ folios[i].photo }}" draggable="false" onclick="MoveDown('{{ i }}bigimage');"><br>
+        <a href="/folios/{{i+2}}" class="foliolink"><span>Folio in detail</span></a>
+    </div>
     {% endfor %}
 </div>
 
